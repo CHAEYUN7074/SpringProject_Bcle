@@ -1,0 +1,145 @@
+package com.test.mvc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.sql.DataSource;
+
+public class MemberInfoDAO implements IMemberInfoDAO
+{
+	private DataSource dataSource;
+
+	public void setDataSource(DataSource dataSource)
+	{
+		this.dataSource = dataSource;
+	}
+	
+	// 멤버 리스트
+	@Override
+	public ArrayList<MemberInfoDAO> list() throws SQLException
+	{
+		ArrayList<MemberInfoDAO> result = new ArrayList<MemberInfoDAO>();
+		
+		return result;
+	}
+	
+	// 지역 대분류 리스트
+	@Override
+	public ArrayList<RegionL> regionLList() throws SQLException
+	{
+		ArrayList<RegionL> result = new ArrayList<RegionL>();
+		
+		return result;
+	}
+	
+	// 지역 소분류 리스트  
+	@Override
+	public ArrayList<RegionS> regionSList() throws SQLException
+	{
+		ArrayList<RegionS> result = new ArrayList<RegionS>();
+		
+		return result;
+	}
+	
+	// 카테고리 리스트 
+	/*
+	@Override
+	public ArrayList<Category> categortyList() throws SQLException
+	{
+		ArrayList<Category> result = new ArrayList<Category>();
+		
+		return result;
+	}
+	*/
+	
+	// 멤버 추가 
+	@Override
+	public int memberInfoAdd(MemberInfoDAO memberInfo) throws SQLException
+	{
+		
+	}
+	
+	// 멤버 삭제
+	@Override
+	public int remove(String employeeId) throws SQLException
+	{
+		
+	}
+	
+	// 멤버 변경
+	@Override
+	public int modify(MemberInfoDAO memberInfo) throws SQLException
+	{
+		
+	}
+	
+	// 아이디로 직원을 검색하는 메소드 
+	@Override
+	public MemberInfoDAO searchId(String id) throws SQLException
+	{
+		
+	}
+	
+	// 로그인
+	@Override
+	public String login(String id, String pw) throws SQLException
+	{
+		String result = null;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT NAME"
+				+ " FROM EMPLOYEE"
+				+ " WHERE EMPLOYEEID=?"
+				+ "   AND SSN2=CRYPTPACK.ENCRYPT(?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(id));
+		pstmt.setString(2, pw);
+		pstmt.setString(3, pw);
+		
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+			result = rs.getString("NAME");
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
+	
+	// 관리자 로그인
+	@Override
+	public String logAdmin(String id, String pw) throws SQLException
+	{
+		String result = null;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT NAME"
+				+ " FROM EMPLOYEE"
+				+ " WHERE EMPLOYEEID=?"
+				+ "   AND SSN2=CRYPTPACK.ENCRYPT(?,?)"
+				+ " AND GRADE=0";		// 일반로그인에서 이것만 추가!
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(id));
+		pstmt.setString(2, pw);
+		pstmt.setString(3, pw);
+		
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+			result = rs.getString("NAME");
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+		
+		
+	
+	
+}

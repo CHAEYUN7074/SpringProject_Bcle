@@ -1,0 +1,8 @@
+package com.test.mvc;
+
+public class MemberInfo
+{
+	private String id, name, ssn, email, tel, pwd, nickname, url;
+	private Int region_s_id, mid;
+	
+}

@@ -1,0 +1,122 @@
+package com.test.mvc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.sql.DataSource;
+
+public class MemberInfoDAO implements IMemberInfoDAO
+{
+	private DataSource dataSource;
+
+	public void setDataSource(DataSource dataSource)
+	{
+		this.dataSource = dataSource;
+	}
+	
+	@Override
+	public ArrayList<MemberInfoDAO> list() throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public ArrayList<RegionL> regionLList() throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public ArrayList<RegionS> regionSList() throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public ArrayList<Category> categortyList() throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public int memberInfoAdd(MemberInfoDAO memberInfo) throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public int remove(String employeeId) throws SQLException
+	{
+		
+	}
+	
+	@Override
+	public int modify(MemberInfoDAO memberInfo) throws SQLException
+	{
+		
+	}
+	public MemberInfoDAO searchId(String id) throws SQLException;	// 아이디를 가지고있는 모든 정보를 찾아야하기 때문에 Employee
+	
+	
+	// 로그인
+	@Override
+	public String login(String id, String pw) throws SQLException
+	{
+		String result = null;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT NAME"
+				+ " FROM EMPLOYEE"
+				+ " WHERE EMPLOYEEID=?"
+				+ "   AND SSN2=CRYPTPACK.ENCRYPT(?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(id));
+		pstmt.setString(2, pw);
+		pstmt.setString(3, pw);
+		
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+			result = rs.getString("NAME");
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
+	// 관리자 로그인
+	@Override
+	public String logAdmin(String id, String pw) throws SQLException
+	{
+		String result = null;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT NAME"
+				+ " FROM EMPLOYEE"
+				+ " WHERE EMPLOYEEID=?"
+				+ "   AND SSN2=CRYPTPACK.ENCRYPT(?,?)"
+				+ " AND GRADE=0";		// 일반로그인에서 이것만 추가!
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, Integer.parseInt(id));
+		pstmt.setString(2, pw);
+		pstmt.setString(3, pw);
+		
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+			result = rs.getString("NAME");
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+		
+		
+	
+	
+}

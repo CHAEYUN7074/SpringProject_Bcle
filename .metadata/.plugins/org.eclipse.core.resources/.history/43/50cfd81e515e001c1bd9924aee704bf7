@@ -1,0 +1,11 @@
+/*===============================
+	RegionS.java
+	- 지역 소분류 DTO
+================================*/
+
+package com.test.mvc;
+
+public class RegionS
+{
+
+}

@@ -1,0 +1,12 @@
+/*===============================
+	RegionL.java
+	- 지역 DTO
+================================*/
+
+package com.test.mvc;
+
+// 지역테이블 2개해서 대분류 소분류 나누기!
+public class RegionL
+{
+	String regionId, city;
+}

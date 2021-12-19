@@ -1,0 +1,62 @@
+package com.test.mvc;
+
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+
+public class ClubBeforeOpenedListDControll implements Controller
+{
+	//주요 속성 구성
+	// → 인터페이스 형태의 자료형을 속성으로 구성
+	private IClubDAO dao;
+
+	// setter 구성
+	public void setDao(IClubDAO dao)
+	{
+		this.dao = dao;
+	}
+	
+	@Override
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+		ModelAndView mav = new ModelAndView();
+
+
+		ArrayList<ClubDTO> list = new ArrayList<ClubDTO>();
+		
+		String day = request.getParameter("day");
+		String title = request.getParameter("title");
+		String nickname = request.getParameter("nickname");
+		String bdate = request.getParameter("bdate");
+		String max = request.getParameter("max");
+		String category_s_id = request.getParameter("category_s_id");
+		String category_l_id = request.getParameter("category_l_id");
+		String content = request.getParameter("content");
+		String region_l_id = request.getParameter("region_l_id");
+		String region_s_id = request.getParameter("region_s_id");
+		String min_age = request.getParameter("min_age");
+		String max_age = request.getParameter("max_age");
+		
+		try
+		{
+			Club list = new Club();
+
+			list.setDay(day);
+
+			mav.setViewName("ClubBeforeOpenedContents.jsp");
+		
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+
+		return mav;
+	}
+
+}

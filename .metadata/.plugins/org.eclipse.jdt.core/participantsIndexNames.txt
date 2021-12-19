@@ -1,0 +1,15 @@
+INDEX VERSION 1.131
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\758086640.index
+\ViewPage\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2742393756.index
+\ViewPage\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3372214620.index
+\Bcle\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\888877038.index
+\Bcle\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2032528783.index
+\ViewPage\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3067371934.index
+\Bcle\src
+C:\Bcle\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2758979607.index
+\Bcle\src

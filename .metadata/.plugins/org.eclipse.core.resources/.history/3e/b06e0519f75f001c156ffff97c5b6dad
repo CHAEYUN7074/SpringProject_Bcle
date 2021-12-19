@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan
+		base-package="org.springframework.samples.petclinic.web" />
+
+	<!-- DataSource 등록 → SimpleDriverDataSource -->
+	<bean id="localDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="teamone"></property>
+		<property name="password" value="tiger"></property>
+	</bean>
+	
+	<bean id="remoteDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@211.238.142.177:1521:xe"></property>
+		<property name="username" value="teamone"></property>
+		<property name="password" value="tiger"></property>
+	</bean>
+	
+	<!-- 동아리 개설 관련 -->
+	<!-- DAO 등록 -->
+	<bean id="clubDAO" class="com.test.mvc.ClubDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	
+	<!-- club 관련 controller -->
+	<bean name="/clubinsertform.action" class="com.test.mvc.ClubInsertFormController">
+		 <property name="dao" ref="clubDAO"></property> 
+	</bean>
+	
+	<!-- club List controller -->
+	<bean name="/clubprelistform.action" class="com.test.mvc.ClubBeforeOpenedListController">
+	 <property name="dao" ref="clubDAO"></property>
+	</bean>
+	
+	<!-- club List controller -->
+	<bean name="/clubprelistform.action" class="com.test.mvc.ClubBeforeOpenedListController">
+	 <property name="dao" ref="clubDAO"></property>
+	</bean>
+	
+	<!-- DAO 등록 -->
+	<bean id="beeDAO" class="com.test.mvc.BeeDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	
+	<!-- memberinfoDAO 등록 -->
+	<bean id="MemberInfoDAO" class="com.test.mvc.MemberInfoDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	
+	<!-- MemberInfoDAO 등록 -->
+	<bean id="AdminDAO" class="com.test.mvc.AdminDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	
+	
+	<!-- Login 및 Logout 관련 Cotroller 등록 -->
+	<bean name="/loginpage.action" class="com.test.mvc.LoginPageController">
+	</bean>
+	
+	<bean name="/login.action" class="com.test.mvc.LoginController">
+		<property name="adminDAO" ref="AdminDAO"></property>
+		<property name="memberinfoDAO" ref="MemberInfoDAO"></property>
+	</bean>
+	
+	<bean name="/logout.action" class="com.test.mvc.LogoutController">
+	</bean>
+
+
+	<!-- MainPageController 등록 -->
+	<bean name="/mainpage.action" class="com.test.mvc.MainPageController">
+	</bean>
+	
+	<!-- MemberListController 등록 -->
+	<bean name="/memberlist.action" class="com.test.mvc.MemberListController">
+	</bean>
+   	
+	
+	<!-- <bean id="regionDAO" class="com.test.mvc.RegionDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	<bean id="departmentDAO" class="com.test.mvc.DepartmentDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean>
+	<bean id="positionDAO" class="com.test.mvc.PositionDAO">
+		<property name="dataSource" ref="remoteDataSource"></property>
+	</bean> -->
+
+
+	<!-- AJAX 관련 Controller 등록 -->
+	<!-- <bean name="/ajax.action" class="com.test.mvc.AjaxController">
+		<property name="dao" ref="employeeDAO"></property>
+	</bean> -->
+
+
+	<!-- Employee 관련 Controller 등록 -->
+	<bean name="/beecalendarlist.action" class="com.test.mvc.BeeCalendarListController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+	<bean name="/beedetailpage.action" class="com.test.mvc.BeeDetailPageController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+	<bean name="/beeinsertform.action" class="com.test.mvc.BeeInsertFormController">
+	</bean>
+	
+	<bean name="/beeinsert.action" class="com.test.mvc.BeeInsertController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+	<bean name="/beeupdateform.action" class="com.test.mvc.BeeUpdateFormController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+	<bean name="/beeupdate.action" class="com.test.mvc.BeeUpdateController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+	<bean name="/beedelete.action" class="com.test.mvc.BeeDeleteController">
+		<property name="dao" ref="beeDAO"></property>
+	</bean>
+	
+</beans>
