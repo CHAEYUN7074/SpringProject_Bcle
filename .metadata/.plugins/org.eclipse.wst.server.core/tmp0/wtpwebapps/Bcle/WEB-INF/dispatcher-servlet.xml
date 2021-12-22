@@ -32,7 +32,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="dataSource" ref="remoteDataSource"></property>
 	</bean>
 	
-	<!-- club 관련 controller -->
+	<!-- club 개설&리스트 관련 controller -->
 	<bean name="/clubinsertform.action" class="com.test.mvc.ClubInsertFormController">
 		 <property name="dao" ref="clubDAO"></property> 
 	</bean>
@@ -42,14 +42,39 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	 <property name="dao" ref="clubDAO"></property>
 	</bean>
 	
-	<bean name="/preopenclubdetail.action" class="com.test.mvc.PreOpenClubDetailController">
+	<bean name="/preclubdelete.action" class="com.test.mvc.PreClubDeleteController">
     <property name="dao" ref="clubDAO"></property>
    </bean>
    
    	<bean name="/clubBeforeListSearch.action" class="com.test.mvc.ClubSearchController">
     <property name="dao" ref="clubDAO"></property>
    </bean>
+   
+   <bean name="/clubinsert.action" class="com.test.mvc.ClubInsertController">
+       <property name="dao" ref="clubDAO"></property> 
+   </bean>
+   
+    <bean name="/checktitle.action" class="com.test.mvc.CheckTitleController">
+      <property name="dao" ref="clubDAO"></property>
+   </bean>
+   
+    <bean name="/preopenclubdetail.action" class="com.test.mvc.PreOpenClubDetailController">
+    	<property name="dao" ref="clubDAO"></property>
+    </bean>
+    
+     <bean name="/preclubupdate.action" class="com.test.mvc.PreClubUpdateController">
+    	<property name="dao" ref="clubDAO"></property>
+    </bean>
+    
+    <bean name="/preclubupdateform.action" class="com.test.mvc.PreClubUpdateFormController">
+    	<property name="dao" ref="clubDAO"></property>
+    </bean>
+    
+	<!-- AjaxCategoryController -->
 
+ <!--    <bean name="/clubbopeneddelete.action" class="com.test.mvc.ClubBOpenedDeleteController">
+      <property name="dao" ref="clubDAO"></property>
+   </bean> 이거뭐야 -->
 	
 	<!-- DAO 등록 -->
 	<bean id="beeDAO" class="com.test.mvc.BeeDAO">
@@ -61,7 +86,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="dataSource" ref="remoteDataSource"></property>
 	</bean>
 	
-	<!-- MemberInfoDAO 등록 -->
+	<!-- AdminInfoDAO 등록 -->
 	<bean id="AdminDAO" class="com.test.mvc.AdminDAO">
 		<property name="dataSource" ref="remoteDataSource"></property>
 	</bean>

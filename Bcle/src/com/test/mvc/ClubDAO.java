@@ -24,9 +24,9 @@ public class ClubDAO implements IClubDAO
    {
       ClubDTO result = new ClubDTO();
       Connection conn = dataSource.getConnection();
-      String sql = "SELECT TITLE,CONTENT,NICKNAME,PREOPENDATE"
-            + ",L_CAT,S_CAT,CITY,LOCAL"
-            + ",MAX,LIMIT_ID,AGELIMIT_ID,MIN_AGE,MAX_AGE,DAY "
+      String sql = "SELECT TITLE,CONTENT,NICKNAME,PREOPENDATE,MID"
+            + "CATEGORY_S_ID,CATEGORY_L_ID,REGION_S_ID,REGION_L_ID,L_CAT,S_CAT,CITY,LOCAL"
+            + ",URL,MAX,LIMIT_ID,AGELIMIT_ID,MIN_AGE,MAX_AGE,DAY "
             + "FROM CLUB_VIEW "
             + "WHERE CID = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -39,10 +39,21 @@ public class ClubDAO implements IClubDAO
          result.setContent(rs.getString("CONTENT"));
          result.setNickname(rs.getString("NICKNAME"));
          result.setPreopendate(rs.getString("PREOPENDATE"));
+         result.setMid(rs.getString("MID"));
+
+         result.setCategory_s_id(rs.getString("CATEGORY_S_ID"));
+         result.setCategory_l_id(rs.getString("CATEGORY_L_ID"));
+         
+         result.setRegion_s_id(rs.getString("REGION_S_ID"));
+         result.setRegion_l_id(rs.getString("REGION_L_ID"));
+         
+         
          result.setL_cat(rs.getString("L_CAT"));
          result.setS_cat(rs.getString("S_CAT"));
          result.setCity(rs.getString("CITY"));
          result.setLocal(rs.getString("LOCAL"));
+         
+         result.setUrl(rs.getString("URL"));        
          result.setMax(Integer.parseInt(rs.getString("MAX")));
          result.setLimit_id(rs.getString("LIMIT_ID"));
          result.setAgelimit_id(rs.getString("AGELIMIT_ID"));
@@ -121,6 +132,35 @@ public class ClubDAO implements IClubDAO
 
          return result;
       }
+      
+      
+		
+		  //동아리 이름 중복검사
+		  
+		  @Override public int checkTitle(String title) throws SQLException { int
+		  result = 0;
+		  
+		  Connection conn = dataSource.getConnection();
+		  
+		  String sql = "SELECT * FROM CLUB_VIEW WHERE TITLE = ?"; PreparedStatement
+		  pstmt = conn.prepareStatement(sql); pstmt.setString(1, title);
+		  
+		  ResultSet rs = pstmt.executeQuery();
+		  
+		  if(rs.next() || title.equals("")) result = 0; else result = 1;
+		  
+		  rs.close(); pstmt.close(); conn.close();
+		  
+		  return result; }
+		 
+
+      
+      
+      
+      
+      
+      
+     
     // 지역 리스트 출력(시) ---city
       @Override
       public ArrayList<Region> regionLList() throws SQLException
@@ -277,6 +317,60 @@ public class ClubDAO implements IClubDAO
        return result;
    }
 
+   //동아리 delete 메소드
+   @Override
+   public int remove(String cid) throws SQLException
+   {
+      int result = 0;
+      
+      Connection conn = dataSource.getConnection();
+      
+      String sql = "DELETE FROM CLUB_VIEW WHERE CID=?";
+      
+      PreparedStatement pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, cid);
+      
+      result = pstmt.executeUpdate();
+      
+      return result;
+   }
+   
+   //동아리 update 메소드
+	// 직원 데이터 수정
+	@Override
+	public int modify(ClubDTO club) throws SQLException
+	{
+		int result = 0;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "UPDATE CLUB SET TITLE=?"
+				+ ", MAX=?, CONTENT=?, CATEGORY_S_ID=?, URL=?"
+				+ ", LIMIT_ID=?, AGELIMIT_ID=?"
+				+ " WHERE CID=?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, club.getTitle());
+		pstmt.setInt(2, club.getMax());
+		pstmt.setString(3, club.getContent());
+		pstmt.setString(4,club.getCategory_s_id());
+		pstmt.setString(5,club.getRegion_s_id());
+		pstmt.setString(6, club.getUrl());
+		pstmt.setString(7, club.getLimit_id());
+		pstmt.setString(8, club.getAgelimit_id());
+
+
+		
+		result = pstmt.executeUpdate();
+		
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
+	
    
    
 }

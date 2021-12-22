@@ -108,40 +108,6 @@ ClubBeforeOpenedList.jsp
    </c:forEach>
    </div>
 
-<%-- 
-
-   <div>
-         <!-- 동아리 목록 -->
-            <c:forEach var="preclub" items="${preopenList}">
-            <tr>
-               <td>
-                <br> ${preclub.title}
-                </td>
-                
-               <td>
-                <br> ${preclub.title}
-                </td>
-                
-                <td>
-                <br> ${preclub.title}
-                </td>
-            </tr>
-            <!-- ★똑같은게 3개 생겨서 우선 주석처리했어요 ㅜ!
-            뭔가 형식을 바꿔야할거같은데 이미지갤러리 하는 방법 알아낸 다음
-            조정해봐요~~~~! -->
-            <a href="preopenclubdetail.action?cid=${preclub.cid}">
-            
-               <span>${preclub.title}</span><br>
-               <span>${preclub.url}</span><br>
-        
-               <br>
-            </a>
-            </c:forEach>
-      </div>
-
-
- --%>
-
       <!-- 풋터영역 -->
       <div>
          <c:import url="footer.jsp"></c:import>

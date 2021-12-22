@@ -28,6 +28,34 @@ String cp = request.getContextPath();
 }
 </style>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function()
+	{
+		$(".updateBtn").click(function()
+		{
+		
+			$(location).attr("href", "/preclubupdateform.action?cid=" + $(this).val());
+			
+			
+		});
+		
+		$(".deleteBtn").click(function()
+		{
+
+			if(confirm("현재 선택한 데이터를 정말 삭제하시겠습니까?"))
+			{
+				$(location).attr("href", "/preclubdelete.action?cid=" + $(this).val());
+			}
+		});
+		
+	});
+
+	
+	
+	
+	
+</script>
 <body>
    <!-- 
 ClubBeforeOpenedContents.jsp
@@ -130,7 +158,11 @@ ClubBeforeOpenedContents.jsp
                      <div>
                               <button type="button" class="btn" id="closeBtn" 
                               onclick="location.href='clubprelistform.action'">닫기</button>
+
+                              <button type="button" class="updateBtn"	value="${clubDetail.cid }">수정</button>
+							  <button type="button" class="deleteBtn" 	value="${clubDetail.cid }">삭제</button>
                            </div>
+
 
                   </div>
 

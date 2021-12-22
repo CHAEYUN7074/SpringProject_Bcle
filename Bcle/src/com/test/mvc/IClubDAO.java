@@ -20,6 +20,13 @@ public interface IClubDAO
    public ArrayList<Category> categorySList(String category_l_id) throws SQLException; //완료
    
    public int insert(ClubDTO club) throws SQLException;// 
+
+   public int checkTitle(String title) throws SQLException; //동아리명 중복검사
+
+   public int remove(String cid) throws SQLException; //동아리 삭제
+
+   public int modify(ClubDTO club) throws SQLException; //동아리 업데이트
+
    
    //정렬, update, 폐쇄 등 추가될 예정
 }
