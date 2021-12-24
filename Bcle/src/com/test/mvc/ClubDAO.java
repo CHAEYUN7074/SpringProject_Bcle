@@ -25,8 +25,8 @@ public class ClubDAO implements IClubDAO
       ClubDTO result = new ClubDTO();
       Connection conn = dataSource.getConnection();
       String sql = "SELECT TITLE,CONTENT,NICKNAME,PREOPENDATE,MID"
-            + "CATEGORY_S_ID,CATEGORY_L_ID,REGION_S_ID,REGION_L_ID,L_CAT,S_CAT,CITY,LOCAL"
-            + ",URL,MAX,LIMIT_ID,AGELIMIT_ID,MIN_AGE,MAX_AGE,DAY "
+            + ",CATEGORY_S_ID,CATEGORY_L_ID,REGION_S_ID,REGION_L_ID,L_CAT,S_CAT,CITY,LOCAL"
+            + ",URL,MAX,LIMIT_ID,AGELIMIT_ID,MIN_AGE,MAX_AGE,DAY,CID "
             + "FROM CLUB_VIEW "
             + "WHERE CID = ?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -60,6 +60,7 @@ public class ClubDAO implements IClubDAO
          result.setMin_age(Integer.parseInt(rs.getString("MIN_AGE")));
          result.setMax_age(Integer.parseInt(rs.getString("MAX_AGE")));
          result.setDay(Integer.parseInt(rs.getString("DAY")));
+         result.setCid(rs.getString("CID"));
 
       }
       
@@ -335,8 +336,8 @@ public class ClubDAO implements IClubDAO
       return result;
    }
    
-   //동아리 update 메소드
-	// 직원 데이터 수정
+   //동아리 modify 메소드
+	
 	@Override
 	public int modify(ClubDTO club) throws SQLException
 	{
@@ -345,7 +346,7 @@ public class ClubDAO implements IClubDAO
 		Connection conn = dataSource.getConnection();
 		
 		String sql = "UPDATE CLUB SET TITLE=?"
-				+ ", MAX=?, CONTENT=?, CATEGORY_S_ID=?, URL=?"
+				+ ", MAX=?, CONTENT=?, CATEGORY_S_ID=?, REGION_S_ID=?, URL=?"
 				+ ", LIMIT_ID=?, AGELIMIT_ID=?"
 				+ " WHERE CID=?";
 		
@@ -359,9 +360,8 @@ public class ClubDAO implements IClubDAO
 		pstmt.setString(6, club.getUrl());
 		pstmt.setString(7, club.getLimit_id());
 		pstmt.setString(8, club.getAgelimit_id());
-
-
-		
+		pstmt.setString(9, club.getCid());
+	
 		result = pstmt.executeUpdate();
 		
 		pstmt.close();
@@ -371,6 +371,94 @@ public class ClubDAO implements IClubDAO
 	}
 	
 	
-   
+	   //세션(session)의 id를 통해 MID를 반환하는 메소드 
+	   // MEMBERINFO의 ID(session)로 MID 찾는 메소드 
+	   public String searchMid(String id) throws SQLException
+	   {
+	      String result="";
+	      Connection conn = dataSource.getConnection();
+
+	      String sql = "SELECT MID FROM MEMBERINFO WHERE ID=?";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, id);
+	      
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	      while(rs.next())
+	         result = rs.getString("MID");
+	      
+	      rs.close();
+	      pstmt.close();
+	      conn.close();
+	      
+	      return result;
+	   }
+	   
+	   
+	   //동아리 가입신청 이력확인 
+	   //어떤 포지션으로 가입신청했는가 조회
+	   //개설 예정 동아리 스태프,총무 지원에서 사용 
+	   public String searchJoin(String mid,String cid) throws SQLException
+	   {
+	      String result = "";
+	      Connection conn = dataSource.getConnection();
+	      
+	      String sql = "SELECT POSITION_ID FROM JOIN_CLUB WHERE CID = ? AND MID=?";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, cid);
+	      pstmt.setString(2, mid);
+	   
+	      ResultSet rs = pstmt.executeQuery();
+	      
+	      if(rs.next()) //이력이 존재 하면
+	         result = rs.getString("POSITION_ID");
+	      else //이력 존재 하지 않으면
+	         result = "-1";
+	      
+	      rs.close();
+	      pstmt.close();
+	      conn.close();
+	      
+	      return result;
+	   }
+	   
+	   //동아리 가입신청 메소드 (insert)
+	   public int joinClub(String cid,String mid,String position_id) throws SQLException
+	   {
+	      int result = 0;
+	      Connection conn = dataSource.getConnection();
+	      String sql = "INSERT INTO JOIN_CLUB(JOIN_ID, CID, MID, BDATE,POSITION_ID) " + 
+	            "VALUES('JC'||JOIN_CLUBSEQ.NEXTVAL,?,?,SYSDATE,?)";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, cid);
+	      pstmt.setString(2, mid);
+	      pstmt.setString(3, position_id);
+	      
+	      result=pstmt.executeUpdate();
+	      
+	      pstmt.close();
+	      conn.close();
+	      
+	      return result;
+	   }
+	   
+	   //개설예정 동아리 스태프, 총무 가입신청 취소
+	   public int joinClubDelete(String cid, String mid) throws SQLException
+	   {
+	      int result = 0;
+	      Connection conn = dataSource.getConnection();
+	      String sql = "DELETE FROM JOIN_CLUB WHERE CID = ? AND MID = ?";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, cid);
+	      pstmt.setString(2, mid);
+	      
+	      result=pstmt.executeUpdate();
+	      
+	      pstmt.close();
+	      conn.close();
+	      
+	      return result;
+	   }
+ 
    
 }

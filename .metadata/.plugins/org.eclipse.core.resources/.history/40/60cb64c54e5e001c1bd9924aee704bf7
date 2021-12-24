@@ -1,9 +1,0 @@
-
-
-package com.test.mvc;
-
-// 4개 속성 구성하고 조인해서 뷰로
-public class Region
-{
-
-}

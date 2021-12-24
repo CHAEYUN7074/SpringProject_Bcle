@@ -26,7 +26,17 @@ public interface IClubDAO
    public int remove(String cid) throws SQLException; //동아리 삭제
 
    public int modify(ClubDTO club) throws SQLException; //동아리 업데이트
+   
+   public String searchMid(String id) throws SQLException; //id에서 mid 얻어내기
+
+   public int joinClub(String cid,String mid,String position_id) throws SQLException;
+   
+   public int joinClubDelete(String cid, String mid) throws SQLException;
+
+   public String searchJoin(String mid, String cid)throws SQLException;
+
+
 
    
-   //정렬, update, 폐쇄 등 추가될 예정
+   //정렬, 폐쇄 등 추가될 예정
 }

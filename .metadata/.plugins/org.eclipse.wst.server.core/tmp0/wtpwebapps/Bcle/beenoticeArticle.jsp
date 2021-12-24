@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>beenoticeArticle.jsp</title>
+<title>BeeNoticeArticle.jsp</title>
 
 <!-- 모달을 위한 링크 -->
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -26,7 +26,7 @@
 body {margin: 0;}
 h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd {margin: 0; padding: 0;}
 h1, h2, h3, h4, h5, h6 {font-weight: 700; }
-a {color: inherit; text-decoration: inherit;}
+a {color: inherit; text-decoration: inherit; }
 img {vertical-align: middle;}
 a img {border: none;}
 li {list-style: none;}
@@ -42,79 +42,79 @@ body {font-family: 'Noto Sans KR', sans-serif; font-size: 14px;}
 /* 아티클 CSS */
 #bbs 
 {
-	width:600px;
-	margin:30px auto;
-	text-align:left;
+   width:150vh;
+   text-align:left;
+   margin-left : 40vh;
+   margin-top : 10vh;
 }
 
 #bbs_title 
 {
-	width:574px;
-	/* padding-left:20px; */
-	height:40px;
-	/* border:3px solid #D6D4A6; */
-	text-align:left;
-	font-weight: bold;
-	line-height:40px;
-	font-size:15pt;
-	margin-bottom:30px;
+   /* padding-left:20px; */
+   height:40px;
+   /* border:3px solid #D6D4A6; */
+   text-align:left;
+   font-weight: bold;
+   line-height:40px;
+   font-size:15pt;
+   margin-bottom:30px;
 }
 
 #bbsArticle 
 {
-	width:600px;
-	overflow: visible;
-	border-top:3px solid #E6D4A6;
-	border-bottom:3px solid #E6D4A6;
-	text-align:left;
+
+   border-top:3px solid #E6D4A6;
+   border-bottom:3px solid #E6D4A6;
+   text-align:left;
+
 }
 
 #bbsArticle_header 
 {
-	height:35px;
-	line-height:35px;
-	border-bottom:2px solid #DBDBDB;
-	text-align:center;
+   height:35px;
+   line-height:35px;
+   border-bottom:2px solid #DBDBDB;
+   text-align:center;
 }
 #bbsArticle dl
 {
-	margin: 0px;
+   margin: 0px;
 }
 #bbsArticle dt 
 {
-	float:left;
-	height:35px;
-	width:60px;
-	line-height:35px;
-	text-align:center;
-	background-color:#EEEEEE;
+   float:left;
+   height:35px;
+   width:60px;
+   line-height:35px;
+   text-align:center;
+   background-color:#EEEEEE;
 }
 
 #bbsArticle dd 
 {
-	float:left;
-	height:35px;
-	width:150px;
-	line-height:35px;
-	text-align:left;
-	padding-left:10px;
+   float:left;
+   height:35px;
+   width:150px;
+   line-height:35px;
+   text-align:left;
+   padding-left:10px;
 }
 
 .bbsArticle_bottomLine 
 {
-	height:35px;
-	line-height:35px;
-	border-bottom:1px solid #DBDBDB;
-	clear:both;
-	text-align:left;
+   height:35px;
+   line-height:35px;
+   border-bottom:1px solid #DBDBDB;
+   clear:both;
+   text-align:left;
 }
 
 .bbsArticle_noLine 
 {
-	height:35px;
-	line-height:35px;
-	clear:both;
-	text-align:left;
+   height:35px;
+   line-height:35px;
+   clear:both;
+   text-align:left;
 }
 
 #bbsArticle_content 
@@ -129,29 +129,29 @@ body {font-family: 'Noto Sans KR', sans-serif; font-size: 14px;}
 
 #bbsArticle_footer 
 {
-	clear:both;
-	height:32px;
-	line-height:32px;
-	margin-bottom:20px;
+   clear:both;
+   height:32px;
+   line-height:32px;
+   margin-bottom:20px;
 }
 
 #bbsArticle_footer #leftFooter
 {
-	float:left;
-	width:300px;
-	text-align:left;
+   float:left;
+   width:300px;
+   text-align:left;
 }
 
 #bbsArticle_footer #rightFooter
 {
-	float:right;
-	width:300px;
-	text-align:right;
+   float:right;
+   width:300px;
+   text-align:right;
 }
 
 .btnimg
 {
-	text-align: right;
+   text-align: right;
 }
 
 /* 모달 css */
@@ -190,104 +190,174 @@ body {font-family: 'Noto Sans KR', sans-serif; font-size: 14px;}
 }
 
 
+
+a:link { color: red; text-decoration: none; float: left;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}
+
+
+
 </style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+   $(function()
+   {
+      // 수정 버튼 클릭
+      $(".updateBtn").click(function()
+      {
+         // 테스트
+         //alert("수정버튼클릭");
+         
+         $(location).attr("href", "beenoticeupdateform.action?beeId=" + $(this).val());
+      });
+      
+      //삭제 버튼 클릭
+      $(".deleteBtn").click(function()
+      {
+         // 테스트
+         //alert("삭제버튼클릭");
+         
+         if (confirm("현재 선택한 데이터를 정말 삭제하시겠습니까?"))
+         {
+            $(location).attr("href", "beenoticedelete.action?beeId=" + $(this).val());
+         }
+      });
+      
+   });
+</script>
+
 </head>
 <body>
 
 <!-- 
  beenoticeArticle.jsp
-	동아리 내 게시판 > 공지사항 > 글목록 클릭 시
+   동아리 내 게시판 > 공지사항 > 글목록 클릭 시
 -->
+<div id="wrap">
+   <div>
+      <!-- 메뉴 영역 -->
+      <c:import url="nav.jsp"></c:import>
 
-<div id="bbs">
+      <!-- 사이드바 영역  -->
 
-	<div id="bbs_title">
-		공지사항
-	</div>
-	
-	<div class="bbsArticle_bottomLine">
-		<a href="">목록</a>
-		<a href="">이전글</a>
-		<a href="">다음글</a>
-	</div>
-	
-	<!-- 동아리원일 때 아닐때 나눠서 버튼 작동하게 해야함!! -->
-	<!-- modal button -->
-	<div class="btnimg">
-	      <a href="#" id="modal1" class="btn btn-success btn-sm"
-	         data-bs-toggle="modal" data-bs-target="#employee_details1">수정하기</a>
-	   
-	      <a href="#" id="modal1" class="btn btn-success btn-sm"
-	         data-bs-toggle="modal" data-bs-target="#employee_details1">삭제하기</a>
-		<img src="" alt="신고이미지"  />
-	</div>
-	
-	
-   <!-- Modal -->
-   <!-- 권한 창 -->
-   <div class="modal fade" id="employee_details1" tabindex="-1"
-      aria-labelledby="employee_details1" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">권한이 없습니다.</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal"
-                  aria-label="닫기"></button>
-            </div>
+      <!-- 동아리 공통 메인 -->
+      <c:import url="meetingmain.jsp"></c:import>
+      <!-- 콘텐츠 영역 -->
+      <div id="bbs">
+      
+         <!-- <div id="bbs_title">
+            [공지사항]
+         </div> -->
+         
+         <div class="bbsArticle_bottomLine">
+            
+         
+         
+         <!-- 동아리원일 때 아닐때 나눠서 버튼 작동하게 해야함!! -->
+         <!-- modal button -->
+         <form>
+         <div class="btnimg">
+              <a href="beenoticelist.action" id="modal1">◀◀목록</a>
+              <!--  <a href="beenoticeupdateform.action" id="modal1" class="btn btn-success btn-sm"
+                  data-bs-toggle="modal" data-bs-target="#employee_details1">수정하기</a>       
+               <a href="#" id="modal1" class="btn btn-success btn-sm"
+                  data-bs-toggle="modal" data-bs-target="#employee_details1">삭제하기</a>-->
+              <button type="button" class="btn updateBtn"
+              value="${beenotice.beeId }">수정</button>
+              <button type="button" class="btn deleteBtn"
+              value="${beenotice.beeId }">삭제</button>
+              <input type="button" value="신고">
          </div>
-      </div>
-   </div><!-- close Modal  -->
+         
+         </div>
+         <!-- Modal -->
+         <!-- 권한 창 -->
+       <!--   <div class="modal fade" id="employee_details1" tabindex="-1"
+            aria-labelledby="employee_details1" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">권한이 없습니다.</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="닫기"></button>
+                  </div>
+               </div>
+            </div>
+         </div> --><!-- close Modal  -->
+      
+      
+            <div id="bbsArticle">
+               
+               <div id="bbsArticle_header">
+                  ${beenotice.title }
+               </div>
+               
+               <div class="bbsArticle_bottomLine">
+                  <dl>
+                     <dt>작성자</dt>
+                     <dd>${beenotice.nickName }</dd>
+                     
+                     <dt>등록일</dt>
+                     <dd>${beenotice.beeDate }</dd>
+                  </dl>
+               </div>
+               
+               <div class="bbsArticle_bottomLine">
+                  <dl>
+                     <dt>조회수</dt>
+                     <dd>${beenotice.cnt }</dd>
+                  </dl>
+               </div>
+               
+               <div id="bbsArticle_content">
+                  <table style="width: 600">
+                     <tr>
+                        <td style="padding: 10px 40px 10px 10px; vertical-align: top; height: 150">
+                           ${beenotice.content }
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+               
+               
+               
+            </div><!-- close #bbsArticle -->
+         
+            <div class="contentList">         
+            <c:choose>
+               <c:when test="${endNext eq 'end'}">
+                  <a>다음글 : 다음 글 없음</a>
+               </c:when>
+               <c:otherwise>
+      <%--             <a href="beenoticearticle.action?beeId=${dtoNext.beeId}">다음글 : ${dtoNext.beeId }번글 : ${dtoNext.title}</a> --%>
+                  <a href="beenoticearticle.action?beeId=${dtoNext.beeId}">다음글 : ${dtoNext.title}</a>
+               </c:otherwise>
+            </c:choose>
+               <br>
+               <c:choose>
+                  <c:when test="${endBefore eq 'end'}">
+               <a>이전글 : 이전 글 없음</a>
+               </c:when>
+               <c:otherwise>
+      <%--             <a href="beenoticearticle.action?beeId=${dtoBefore.beeId }">이전글 :${dtoBefore.beeId }번글 : ${dtoBefore.title }</a> --%>
+                  <a href="beenoticearticle.action?beeId=${dtoBefore.beeId }">이전글 : ${dtoBefore.title }</a>
+               </c:otherwise>
+            </c:choose>
+            </div>
+         
+         <%-- <c:import url="comment.jsp"></c:import>    --%>
+         </form>
+               
+      </div><!-- close #bbs -->
+      
+   </div>
+   </div>
+      
 
-
-		<div id="bbsArticle">
-			
-			<div id="bbsArticle_header">
-				게시물의 제목입니다.
-			</div>
-			
-			<div class="bbsArticle_bottomLine">
-				<dl>
-					<dt>작성자</dt>
-					<dd>비클러</dd>
-					
-					<dt>등록일</dt>
-					<dd>2021-12-05</dd>
-				</dl>
-			</div>
-			
-			<div class="bbsArticle_bottomLine">
-				<dl>
-					<dt>댓글수</dt>
-					<dd>51</dd>
-				</dl>
-				<dl>
-					<dt>조회수</dt>
-					<dd>251</dd>
-				</dl>
-			</div>
-			
-			<div id="bbsArticle_content">
-				<table style="width: 600">
-					<tr>
-						<td style="padding: 10px 40px 10px 10px; vertical-align: top; height: 150">
-							어쩌구 저쩌구 이러쿵 저러쿵 내용입니다.<br>
-						</td>
-					</tr>
-				</table>
-			</div>
-			
-			
-			
-		</div><!-- close #bbsArticle -->
-	
-	
-	<c:import url="comment.jsp"></c:import>	
-	
-			
-</div><!-- close #bbs -->
-
-	<!-- 모달창 스크립트 -->
-	<script
+   <!-- 모달창 스크립트 -->
+   <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
       integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
       crossorigin="anonymous"></script>

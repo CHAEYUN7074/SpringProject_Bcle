@@ -55,19 +55,19 @@ public class PreClubUpdateController implements Controller
       String title = multi.getParameter("title");
       String url = multi.getFilesystemName("url");
       String category_s_id = multi.getParameter("category_S_Id");
-      String category_l_id = multi.getParameter("category_L_Id");
       String region_s_id = multi.getParameter("region_S_Id");
-      String region_l_id = multi.getParameter("region_L_Id");
       int max = Integer.parseInt(multi.getParameter("max"));
       String content = multi.getParameter("content");
       String limit_id = multi.getParameter("regionlimit");
       String agelimit_id = multi.getParameter("agelimit");   
+      String cid = multi.getParameter("cid");
       
-      //System.out.println(title+url+category_s_id+region_s_id+max+content+limit_id+agelimit_id);
       
       try
       {
          ClubDTO club = new ClubDTO();
+         
+         
          
          club.setTitle(title);
          club.setUrl(path+"/"+url);
@@ -77,8 +77,9 @@ public class PreClubUpdateController implements Controller
          club.setContent(content);
          club.setLimit_id(limit_id);
          club.setAgelimit_id(agelimit_id);
+         club.setCid(cid);
          
-         dao.insert(club);
+         dao.modify(club);
          
          mav.setViewName("redirect:clubprelistform.action");
 

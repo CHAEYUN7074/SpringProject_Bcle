@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
    request.setCharacterEncoding("UTF-8");
-String cp = request.getContextPath();
+   String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -166,72 +166,59 @@ String cp = request.getContextPath();
    {
       $("#submitBtn").click(function()
       {
-         if ($.trim($("#title").val()).length == 0)
+          if ($.trim($("#title").val()).length == 0)
          {
             alert("동아리명을 입력하세요.");
             $("#title").focus();
-            return false;
+            return;
          }
          
-         if ($("#category_L_Id").val().length == 0)
+         if ($("#category_L_Id").val() == "")
          {
             alert("카테고리를 선택해주세요");
             $("#category_L_Id").focus();
-            return false;
+            return;
          }
-         if ($("#category_S_Id").val().length == 0)
+         if ($("#category_S_Id").val()== "")
          {
             alert("카테고리를 선택해주세요");
             $("#category_S_Id").focus();
-            return false;
+            return;
          }
-         if ($("#region_L_ID").val().length == 0)
+         //다되는데 지역은 왜 안되는지 모르겠다...
+         if ($("#region_L_Id").val()== "")
          {
             alert("지역을 선택해주세요");
-            $("#region_L_ID").focus();
-            return false;
+            $("#region_L_Id").focus();
+            return;
          }
-         if ($("#region_S_ID").val().length == 0)
+         if ($("#region_S_ID").val()== "")
          {
             alert("지역을 선택해주세요");
             $("#region_S_ID").focus();
-            return false;
+            return;
          }
          if ($("#max").val().length == 0)
          {
             alert("최대 인원을 입력하세요");
             $("#max").focus();
-            return false;
+            return;
          }
 
           if ($("#content").val().length == 0)
           {
-          alert("내용을 입력하세요");
-          $("#content").focus();
-          return false;
-          } 
-
-         
+	          alert("내용을 입력하세요");
+	          $("#content").focus();
+	          return;
+          }
+  
          $("#clubForm").submit();
       });
    });
 
    
 </script>
-<script type="text/javascript">
 
-   $(document).ready(function()
-    {
-      $("#submitBtn").click(function()
-      {
-         //alert("확인");
-         
-         $("#clubForm").submit();
-         
-      });
-      
-    });
-</script>
 
 </head>
 <body>

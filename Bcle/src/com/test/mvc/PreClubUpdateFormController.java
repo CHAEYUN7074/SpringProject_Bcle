@@ -26,7 +26,7 @@ public class PreClubUpdateFormController implements Controller
 			ModelAndView mav = new ModelAndView();
 
 
-			ArrayList<ClubDTO> preclub = new ArrayList<ClubDTO>();			
+			/* ArrayList<ClubDTO> preclub = new ArrayList<ClubDTO>(); */		
 			ArrayList<Region> regionLList = new ArrayList<Region>(); 
 			ArrayList<Category> categoryLList = new ArrayList<Category>();
 			
@@ -46,7 +46,7 @@ public class PreClubUpdateFormController implements Controller
 				mav.addObject("regionLList", regionLList);
 				mav.addObject("categoryLList", categoryLList);				
 
-				mav.setViewName("redirect:preclubupdateform.action");
+				mav.setViewName("PreClubUpdateForm.jsp");
 				
 			} catch (Exception e)
 			{

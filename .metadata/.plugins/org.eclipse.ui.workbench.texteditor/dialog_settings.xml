@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="pre"/>
+		<item key="selection" value="account"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="pre"/>
-			<item value="MIDCATEGORY_S_ID"/>
-			<item value="detail"/>
-			<item value="show"/>
-			<item value="Object"/>
-			<item value="PreClubUpdateController"/>
-			<item value="employee"/>
-			<item value="ClubBeforeOpenedListController"/>
-			<item value="preopenclubdetail.action"/>
-			<item value="preclubdelete.action"/>
-			<item value="ok"/>
-			<item value="insert"/>
-			<item value="id"/>
+			<item value="account"/>
+			<item value="accountSelect"/>
+			<item value="find"/>
+			<item value="innovations"/>
+			<item value="title"/>
+			<item value="margin"/>
+			<item value="bbsArticle"/>
 			<item value="content"/>
-			<item value="category_L_Id"/>
+			<item value="me"/>
+			<item value="join"/>
+			<item value="ajaxcategory.action"/>
+			<item value="preclubupdate.action"/>
+			<item value="update"/>
+			<item value="login"/>
+			<item value="search"/>
 		</list>
 		<list key="replacehistory">
+			<item value="find"/>
+			<item value=""/>
+			<item value="join"/>
 			<item value="club"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1388"/>
-		<item key="DIALOG_Y_ORIGIN" value="310"/>
+		<item key="DIALOG_X_ORIGIN" value="1175"/>
+		<item key="DIALOG_Y_ORIGIN" value="240"/>
 		<item key="DIALOG_WIDTH" value="340"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

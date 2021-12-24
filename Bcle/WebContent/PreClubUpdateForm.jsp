@@ -120,73 +120,60 @@ String cp = request.getContextPath();
    $(document).ready(function()
    {
       $("#submitBtn").click(function()
-      {
+      { 
          if ($("#title").val().length == 0)
          {
             alert("동아리명을 입력하세요.");
             $("#title").focus();
-            return false;
+            return;
          }
          
-         if ($("#category_L_Id").val().length == 0)
+         if ($("#category_L_Id").val() == 0)
          {
             alert("카테고리를 선택해주세요");
             $("#category_L_Id").focus();
-            return false;
+            return;
          }
-         if ($("#category_S_Id").val().length == 0)
+         if ($("#category_S_Id").val() == 0)
          {
             alert("카테고리를 선택해주세요");
             $("#category_S_Id").focus();
-            return false;
+            return;
          }
-         if ($("#region_L_ID").val().length == 0)
+         if ($("#region_L_ID").val() == 0)
          {
             alert("지역을 선택해주세요");
             $("#region_L_ID").focus();
-            return false;
+            return;
          }
-         if ($("#region_S_ID").val().length == 0)
+         if ($("#region_S_ID").val() == 0)
          {
             alert("지역을 선택해주세요");
             $("#region_S_ID").focus();
-            return false;
+            return;
          }
          if ($("#max").val().length == 0)
          {
             alert("최대 인원을 입력하세요");
             $("#max").focus();
-            return false;
+            return;
          }
 
           if ($("#content").val().length == 0)
           {
           alert("내용을 입력하세요");
           $("#content").focus();
-          return false;
+          return;
           } 
-
+ 
          
-         $("#clubForm").submit();
+         $("#updateForm").submit();
       });
    });
 
    
 </script>
-<script type="text/javascript">
 
-   $(document).ready(function()
-    {
-      $("#submitBtn").click(function()
-      {
-         //alert("확인");
-         
-         $("#clubForm").submit();
-         
-      });
-      
-    });
-</script>
 
 </head>
 <body>
@@ -213,8 +200,9 @@ ClubCreate.jsp
          <div>
             <form action="preclubupdate.action" method="post" id="updateForm" enctype="multipart/form-data">
                <div>
+                  <input type="text" name="cid" value="${preopen.cid}" style="display: none;"> <!-- cid 안보이게 삽입 -->
                   <p>
-                  동아리명<input type="text" name="title" id="title" class="title" maxlength='20'  value="${club.cid }">
+                  동아리명<input type="text" name="title" id="title" class="title" maxlength='20'  value="${preopen.title }">
                   </p>
                   <input type="button" value="중복확인" id="check">
                   <span id="checkTitle" style="font-size: small;"></span><br>
@@ -233,15 +221,14 @@ ClubCreate.jsp
                   <div>
                      카테고리 
                      <select id="category_L_Id" name="category_L_Id">
-                         <option value="" selected="selected">대분류</option> 
                         <c:forEach var="category" items="${categoryLList }">
-                           <option value=" ${category.category_l_id }">${category.l_cat }
-                          ${club.category_l_id == categoryLList.category_l_id ? 
-                      	"selected=\"selected\"" : ""}>${region.regionName }</option>
+                            <option value="${category.category_l_id}"
+                            ${preopen.category_l_id == category.category_l_id ? "selected=\"selected\"" : "" }
+                             >${category.l_cat}</option>
                         </c:forEach>
                      </select> 
                      <select id="category_S_Id" name="category_S_Id">
-                        <option value="" selected="selected">소분류</option>
+                        <option value="${preopen.category_s_id}" selected="selected">${preopen.s_cat}</option>
                      </select>
                   </div>
 
@@ -250,18 +237,19 @@ ClubCreate.jsp
 
                      지역  
                      <select id="region_L_Id" name="region_L_Id">
-                        <option value="" selected="selected">시</option> 
                         <c:forEach var="region" items="${regionLList }">
-                           <option value="${region.region_l_id }">${region.city }</option>
+                            <option value="${region.region_l_id}"
+                            ${preopen.region_l_id == region.region_l_id ? "selected=\"selected\"" : "" }
+                             >${region.city}</option>
                         </c:forEach>
                      </select>      
                      <select id="region_S_Id" name="region_S_Id">
-                        <option value="" selected="selected">군/구</option> 
+                        <option value="${preopen.region_s_id}" selected="selected">${preopen.local}</option> 
                      </select>
                   </div>
 
                   <p>
-                     가입 최대인원 설정<input type="text" id="max" name="max"  value="${preopen.max} placeholder="최대 200명">
+                     가입 최대인원 설정<input type="text" id="max" name="max"  value="${preopen.max}">
                   </p>
                   <div>
                      <p>내용</p>
@@ -276,9 +264,11 @@ ClubCreate.jsp
                      
                      <div>
                         지역제한
-                        <input type="radio" name="regionlimit" value="X" id="regionlimitX" checked="checked">
+                        <input type="radio" name="regionlimit" value="X" id="regionlimitX" 
+                        ${preopen.limit_id == 'X' ? "checked=\"checked\"" : "" }>
                         <label for="regionlimitX">없음</label>
-                        <input type="radio" name="regionlimit" id="regionlimitO" value="O" > 
+                        <input type="radio" name="regionlimit" id="regionlimitO" value="O"
+                        ${preopen.limit_id == 'O' ? "checked=\"checked\"" : "" } > 
                         <label for="regionlimitO">있음</label>
                         <br>
                         나이제한
@@ -289,10 +279,10 @@ ClubCreate.jsp
                         <br>※동아리장이 성인인 경우 10대만 모집하는것은 불가능합니다.
                      </div>
 
-<!--                      <div>
+                     <div>
                         <button type="button" class="btn" id="submitBtn">등록</button>
                         <button type="button" class="btn" id="cancleBtn" onclick="location.href='MainPage.jsp'">취소</button>
-                     </div> -->
+                     </div>
 
                   </div>
 
@@ -311,4 +301,3 @@ ClubCreate.jsp
 
 
 </script>
-</html>
